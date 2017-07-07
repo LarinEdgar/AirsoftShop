@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.entity.Goods;
+import com.entity.DbgoodsEntity;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,15 +10,15 @@ import java.util.List;
  */
 public interface GoodsDAO {
 
-    public void addGoods(Goods goods) throws SQLException;
+    public void addGoods(DbgoodsEntity dbgoodsEntity) throws SQLException;
 
-    public void updateGoods(Goods goods) throws SQLException;
+    public void updateGoods(DbgoodsEntity dbgoodsEntity) throws SQLException;
 
-    public Goods getGoodsById(long id) throws SQLException;
+    public DbgoodsEntity getGoodsById(long id) throws SQLException;
 
     public List getAllGoods() throws SQLException;
 
-    public void deleteGoods(Goods goods);
+    public void deleteGoods(DbgoodsEntity dbgoodsEntity) throws SQLException;
 
 
 }
