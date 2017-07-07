@@ -7,6 +7,7 @@
           <unit-entry name="a.xml" value="9100b76f-3206-4a57-afa2-f18177bfe73f" />
           <unit-entry name="com:lib:hibernate.cfg.xml" value="9100b76f-3206-4a57-afa2-f18177bfe73f" />
           <unit-entry name="com:utils:hibernate.cfg.xml" />
+          <unit-entry name="hibernate.cfg.xml" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/java/com/resource/hibernate.cfg.xml" />
