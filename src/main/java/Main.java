@@ -16,6 +16,10 @@ public class Main {
         DbgoodsEntity dbgoodsEntity = new DbgoodsEntity();
         dbgoodsEntity.setGoodsName("M4A1");
         dbgoodsEntity.setPrise(300L);
+        dbgoodsEntity.setCategory("Rifle");
+        dbgoodsEntity.setGoodsName("Glock19Pro");
+        dbgoodsEntity.setPrise(325L);
+        dbgoodsEntity.setCategory("Pistol");
 
         System.out.println("Saving entity");
         session.save(dbgoodsEntity);
