@@ -20,5 +20,7 @@ public interface GoodsDAO {
 
     public void deleteGoods(DbgoodsEntity dbgoodsEntity) throws SQLException;
 
+    public DbgoodsEntity getCategory(String category) throws SQLException;
+
 
 }

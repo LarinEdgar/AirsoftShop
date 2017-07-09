@@ -78,7 +78,7 @@ public class GoodsDAOImpl implements GoodsDAO {
         return goodses;
     }
 
-    public void deleteGoods(DbgoodsEntity goods) {
+    public void deleteGoods(DbgoodsEntity goods) throws SQLException{
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -92,5 +92,21 @@ public class GoodsDAOImpl implements GoodsDAO {
                 session.close();
             }
         }
+    }
+
+    public DbgoodsEntity getCategory(String category) throws SQLException{
+        Session session = null;
+        DbgoodsEntity goods = null;
+        try {
+            session = HibernateSessionFactory.getSessionFactory().openSession();
+            goods = (DbgoodsEntity) session.load(DbgoodsEntity.class, category);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return goods;
     }
 }
