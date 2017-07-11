@@ -11,6 +11,8 @@ public class DbuserEntity {
     private int userId;
     private String userName;
     private String lastName;
+    private String email;
+    private String password;
 
     @Id
     @Column(name = "USER_ID")
@@ -42,6 +44,26 @@ public class DbuserEntity {
         this.lastName = lastName;
     }
 
+    @Basic
+    @Column(name = "EMAIL")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Basic
+    @Column(name = "PASSWORD")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,8 +74,9 @@ public class DbuserEntity {
         if (userId != that.userId) return false;
         if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        return !(password != null ? !password.equals(that.password) : that.password != null);
 
-        return true;
     }
 
     @Override
@@ -61,6 +84,8 @@ public class DbuserEntity {
         int result = userId;
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
 }

@@ -1,5 +1,6 @@
-import com.dao.GoodsDAOImpl;
 import com.entity.DbgoodsEntity;
+import com.entity.DbshoppingbagEntity;
+import com.entity.DbuserEntity;
 import com.utils.HibernateSessionFactory;
 import org.hibernate.Session;
 
@@ -30,8 +31,17 @@ public class Main {
         dbgoodsEntity.setPrise(25.5);
         dbgoodsEntity.setCategory("Grenade");
 
-        GoodsDAOImpl goodsDAOImpl = new GoodsDAOImpl();
-        goodsDAOImpl.getCategory("Grenade");
+        DbuserEntity dbuserEntity = new DbuserEntity();
+        dbuserEntity.setUserName("Ivan");
+        dbuserEntity.setLastName("Ivanov");
+        dbuserEntity.setEmail("IvanIvanov93@gmail.com");
+        dbuserEntity.setPassword("1234a");
+
+        DbshoppingbagEntity dbshoppingbagEntity = new DbshoppingbagEntity();
+        dbshoppingbagEntity.setName("M4A1");
+        dbshoppingbagEntity.setPrise(300.75);
+        dbshoppingbagEntity.setCategory("Rifile");
+        dbshoppingbagEntity.setQuantity(1);
 
         System.out.println("Saving entity");
         session.save(dbgoodsEntity);

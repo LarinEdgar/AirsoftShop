@@ -20,4 +20,6 @@ public interface UserDAO {
 
     public void deleteUser(DbuserEntity dbuserEntity) throws SQLException;
 
+    public DbuserEntity getEmail(String email) throws SQLException;
+
 }

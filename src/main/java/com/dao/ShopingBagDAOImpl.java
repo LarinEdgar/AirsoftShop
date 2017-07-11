@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.entity.DbuserEntity;
+import com.entity.DbshoppingbagEntity;
 import com.utils.HibernateSessionFactory;
 import org.hibernate.Session;
 
@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Shleck on 7/4/2017.
+ * Created by Shleck on 7/11/2017.
  */
-public class UserDAOImpl implements UserDAO {
+public class ShopingBagDAOImpl implements ShopingBagDAO {
 
-    public void addUser(DbuserEntity user) throws SQLException {
+    public void addGoods(DbshoppingbagEntity goods) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            session.save(user);
+            session.save(goods);
             session.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
@@ -30,12 +30,28 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    public void updateUser(DbuserEntity user) throws SQLException {
+    public List getAllGoods() throws SQLException {
+        Session session = null;
+        List goods = new ArrayList<DbshoppingbagEntity>();
+        try {
+            session = HibernateSessionFactory.getSessionFactory().openSession();
+            goods = session.createCriteria(DbshoppingbagEntity.class).list();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return goods;
+    }
+
+    public void deleteGoods(DbshoppingbagEntity goods) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(user);
+            session.delete(goods);
             session.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
@@ -46,12 +62,13 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    public DbuserEntity getUserById(long id) throws SQLException {
+    // TODO finish method for change quantity, at this moment this method only returns the goods on quantity
+    public DbshoppingbagEntity changeQuantity(int number) throws SQLException {
         Session session = null;
-        DbuserEntity user = null;
+        DbshoppingbagEntity quantity = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
-            user = (DbuserEntity) session.load(DbuserEntity.class, id);
+            quantity = (DbshoppingbagEntity) session.load(DbshoppingbagEntity.class, number);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
         } finally {
@@ -59,54 +76,6 @@ public class UserDAOImpl implements UserDAO {
                 session.close();
             }
         }
-        return user;
-    }
-
-    public List getAllUser() throws SQLException {
-        Session session = null;
-        List users = new ArrayList<DbuserEntity>();
-        try {
-            session = HibernateSessionFactory.getSessionFactory().openSession();
-            users = session.createCriteria(DbuserEntity.class).list();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return users;
-    }
-
-    public void deleteUser(DbuserEntity user) throws SQLException {
-        Session session = null;
-        try {
-            session = HibernateSessionFactory.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(user);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-    }
-
-    public DbuserEntity getEmail(String email) throws SQLException {
-        Session session = null;
-        DbuserEntity user = null;
-        try {
-            session = HibernateSessionFactory.getSessionFactory().openSession();
-            user = (DbuserEntity) session.load(DbuserEntity.class, email);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return user;
+        return quantity;
     }
 }
