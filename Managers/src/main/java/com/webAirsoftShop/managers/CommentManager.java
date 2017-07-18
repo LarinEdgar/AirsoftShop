@@ -1,7 +1,7 @@
 package com.webAirsoftShop.managers;
 
-import com.entity.DbcommentsEntity;
-import com.entity.DbuserEntity;
+import com.entity.Comments;
+import com.entity.User;
 import com.factory.Factory;
 
 import java.sql.Date;
@@ -24,7 +24,7 @@ public class CommentManager {
     public void addComment(Map<String, String[]> mapParam) throws Exception {
 
         int id = Integer.parseInt(mapParam.get("index")[0]);
-        DbuserEntity currentUser = null;
+        User currentUser = null;
         try {
             currentUser = Factory.getInstance().getUserDAO().getUserById(id);
         } catch (SQLException e) {
@@ -34,14 +34,14 @@ public class CommentManager {
         }
         String commentText = mapParam.get("commentText")[0];
         String dateStr = mapParam.get("date")[0];
-        DbcommentsEntity comments = new DbcommentsEntity();
+        Comments comments = new Comments();
 
         Date date = Date.valueOf(dateStr);
         comments.setCommentText(commentText);
         comments.setDateComment(date);
     }
 
-    private void addInputComment(DbcommentsEntity comments, DbuserEntity currentUser) throws Exception {
+    private void addInputComment(Comments comments, User currentUser) throws Exception {
         comments.setUser(currentUser);
         try {
             System.out.println("get factory");

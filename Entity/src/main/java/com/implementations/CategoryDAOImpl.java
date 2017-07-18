@@ -1,25 +1,26 @@
 package com.implementations;
 
-import com.dao.UserDAO;
-import com.entity.User;
+import com.dao.CategoryDAO;
+import com.entity.Category;
 import com.utils.HibernateSessionFactory;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Shleck on 7/4/2017.
+ * Created by Shleck on 7/18/2017.
  */
-public class UserDAOImpl implements UserDAO {
+public class CategoryDAOImpl implements CategoryDAO{
 
-    public void addUser(User user) throws SQLException {
+    public void addCategory(Category category) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            session.save(user);
+            session.save(category);
             session.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
@@ -30,12 +31,12 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    public void updateUser(User user) throws SQLException {
+    public void updateCategory(Category category) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(user);
+            session.update(category);
             session.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
@@ -46,12 +47,12 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    public User getUserById(long id) throws SQLException {
+    public Category getCategoryById(long id) throws SQLException {
         Session session = null;
-        User user = null;
+        Category category = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
-            user = (User) session.load(User.class, id);
+            category = (Category) session.load(Category.class, id);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
         } finally {
@@ -59,15 +60,31 @@ public class UserDAOImpl implements UserDAO {
                 session.close();
             }
         }
-        return user;
+        return category;
     }
 
-    public void deleteUser(User user) throws SQLException {
+    public List getAllCategory() throws SQLException {
+        Session session = null;
+        List categories = new ArrayList<Category>();
+        try {
+            session = HibernateSessionFactory.getSessionFactory().openSession();
+            categories = session.createCriteria(Category.class).list();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return categories;
+    }
+
+    public void deleteCategory(Category category) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            session.delete(user);
+            session.delete(category);
             session.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
@@ -76,34 +93,5 @@ public class UserDAOImpl implements UserDAO {
                 session.close();
             }
         }
-    }
-
-    @Override
-    public User getUserByName(String name) {
-        Session session = null;
-        User user = null;
-        try {
-            session = HibernateSessionFactory.getSessionFactory().openSession();
-            Query query = session.createQuery("FROM User WHERE name =:paramName");
-            query.setParameter("paramName", name);
-            user = (User) query.uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
-    public Long getUserIdByName(String name) {
-        Long idUser = null;
-        try {
-            Session session = HibernateSessionFactory.getSessionFactory().openSession();
-            Query query = session.createQuery("SELECT idUser FROM User WHERE name =:paramName");
-            query.setParameter("paramName", name);
-            idUser = (Long) query.uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            //MUST be dan
-        }
-        return idUser;
     }
 }

@@ -7,11 +7,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "dbgoods", schema = "", catalog = "airsoft_db")
-public class DbgoodsEntity {
+public class Goods {
     private int goodsId;
     private String goodsName;
     private double prise;
-    private String category;
+    private GlobalInvoice globalInvoice;
+    private Purchase purchase;
+    private Category category;
 
     @Id
     @Column(name = "GOODS_ID")
@@ -43,27 +45,26 @@ public class DbgoodsEntity {
         this.prise = prise;
     }
 
-    @Basic
-    @Column(name = "CATEGORY")
-    public  String getCategory(){
-        return category;
-    }
+    //TODO: Finish the connection
+   /* @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "idGlobalInvoice")*/
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    /*@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "idPurchase")*/
+
+    /*@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "idCategory")*/
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DbgoodsEntity that = (DbgoodsEntity) o;
+        Goods goods = (Goods) o;
 
-        if (goodsId != that.goodsId) return false;
-        if (Double.compare(that.prise, prise) != 0) return false;
-        if (goodsName != null ? !goodsName.equals(that.goodsName) : that.goodsName != null) return false;
-        return !(category != null ? !category.equals(that.category) : that.category != null);
+        if (goodsId != goods.goodsId) return false;
+        if (Double.compare(goods.prise, prise) != 0) return false;
+        return !(goodsName != null ? !goodsName.equals(goods.goodsName) : goods.goodsName != null);
 
     }
 
@@ -75,7 +76,6 @@ public class DbgoodsEntity {
         result = 31 * result + (goodsName != null ? goodsName.hashCode() : 0);
         temp = Double.doubleToLongBits(prise);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (category != null ? category.hashCode() : 0);
         return result;
     }
 }

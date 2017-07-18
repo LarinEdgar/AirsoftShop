@@ -1,7 +1,7 @@
 package com.implementations;
 
 import com.dao.CommetsDAO;
-import com.entity.DbcommentsEntity;
+import com.entity.Comments;
 import com.utils.HibernateSessionFactory;
 import org.hibernate.Session;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class CommentsDAOImpl implements CommetsDAO {
 
     @Override
-    public void addComment(DbcommentsEntity comments) throws SQLException {
+    public void addComment(Comments comments) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -33,7 +33,7 @@ public class CommentsDAOImpl implements CommetsDAO {
     }
 
     @Override
-    public void updateComment(DbcommentsEntity comments) throws SQLException {
+    public void updateComment(Comments comments) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -50,7 +50,7 @@ public class CommentsDAOImpl implements CommetsDAO {
     }
 
     @Override
-    public void deleteComment(DbcommentsEntity comments) throws SQLException {
+    public void deleteComment(Comments comments) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -67,9 +67,9 @@ public class CommentsDAOImpl implements CommetsDAO {
     }
 
     @Override
-    public List<DbcommentsEntity> getCommentsByUserID(long idUser) throws SQLException {
+    public List<Comments> getCommentsByUserID(long idUser) throws SQLException {
         Session session = null;
-        List<DbcommentsEntity> commentsList = new ArrayList<DbcommentsEntity>();
+        List<Comments> commentsList = new ArrayList<Comments>();
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             commentsList = session.createFilter("idUser", Long.toString(idUser)).list();

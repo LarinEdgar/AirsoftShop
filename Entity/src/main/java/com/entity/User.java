@@ -7,12 +7,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "dbuser", schema = "", catalog = "airsoft_db")
-public class DbuserEntity {
+public class User {
     private int userId;
     private String userName;
-    private String lastName;
     private String email;
     private String password;
+    private GlobalInvoice globalInvoice;
+    private Purchase purchase;
 
     @Id
     @Column(name = "USER_ID")
@@ -54,18 +55,24 @@ public class DbuserEntity {
         this.password = password;
     }
 
+    //TODO: Finish the connection
+    /* @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "idGlobalInvoice")*/
+
+    /*@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "idPurchase")*/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DbuserEntity that = (DbuserEntity) o;
+        User user = (User) o;
 
-        if (userId != that.userId) return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        return !(password != null ? !password.equals(that.password) : that.password != null);
+        if (userId != user.userId) return false;
+        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return !(password != null ? !password.equals(user.password) : user.password != null);
 
     }
 
@@ -73,7 +80,6 @@ public class DbuserEntity {
     public int hashCode() {
         int result = userId;
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;

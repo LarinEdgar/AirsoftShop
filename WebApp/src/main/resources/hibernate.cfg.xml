@@ -14,8 +14,8 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.cache.use_structured_entries">true</property>
-        <mapping class="com.entity.DbgoodsEntity"/>
-        <mapping class="com.entity.DbuserEntity"/>
+        <mapping class="com.entity.Goods"/>
+        <mapping class="com.entity.User"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

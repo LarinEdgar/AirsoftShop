@@ -1,9 +1,10 @@
 package com.factory;
 
 import com.dao.*;
-import com.implementations.CommentsDAOImpl;
-import com.implementations.GoodsDAOImpl;
-import com.implementations.UserDAOImpl;
+import com.entity.Category;
+import com.entity.GlobalInvoice;
+import com.entity.Purchase;
+import com.implementations.*;
 
 /**
  * Created by Shleck on 7/4/2017.
@@ -13,6 +14,9 @@ public class Factory {
     private static GoodsDAO goodsDAO = null;
     private static UserDAO userDAO = null;
     private static CommetsDAO commetsDAO = null;
+    private static CategoryDAO categoryDAO = null;
+    private GlobalInvoiceDAO globalInvoiceDAO = null;
+    private PurchaseDAO purchaseDAO = null;
     private static Factory instance = null;
 
     public static synchronized Factory getInstance() {
@@ -42,4 +46,26 @@ public class Factory {
         }
         return commetsDAO;
     }
+
+    public CategoryDAO getCategoryDAO() {
+        if (categoryDAO == null) {
+            categoryDAO = new CategoryDAOImpl();
+        }
+        return categoryDAO;
+    }
+
+    public GlobalInvoiceDAO getGlobalInvoiceDAO() {
+        if (globalInvoiceDAO == null) {
+            globalInvoiceDAO = new GlobalInvoiceDAOImpl();
+        }
+        return globalInvoiceDAO;
+    }
+
+    public PurchaseDAO getPurchaseDAO() {
+        if (purchaseDAO == null) {
+            purchaseDAO = new PurchaseDAOImpl();
+        }
+        return purchaseDAO;
+    }
+
 }

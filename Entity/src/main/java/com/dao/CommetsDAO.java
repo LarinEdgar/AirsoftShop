@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.entity.DbcommentsEntity;
+import com.entity.Comments;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface CommetsDAO {
 
-    public void addComment(DbcommentsEntity comments) throws SQLException;
+    public void addComment(Comments comments) throws SQLException;
 
-    public void updateComment(DbcommentsEntity comments) throws SQLException;
+    public void updateComment(Comments comments) throws SQLException;
 
-    public void deleteComment(DbcommentsEntity comments) throws SQLException;
+    public void deleteComment(Comments comments) throws SQLException;
 
-    public List<DbcommentsEntity> getCommentsByUserID(long idUser) throws SQLException;
+    public List<Comments> getCommentsByUserID(long idUser) throws SQLException;
 }

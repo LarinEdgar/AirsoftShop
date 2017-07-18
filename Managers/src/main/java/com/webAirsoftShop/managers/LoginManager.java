@@ -1,7 +1,7 @@
 package com.webAirsoftShop.managers;
 
 
-import com.entity.DbuserEntity;
+import com.entity.User;
 import com.factory.Factory;
 
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ public class LoginManager {
         String[] resultData = new String[2];
         String name = paramMap.get("login")[0];
         String password = paramMap.get("password")[0];
-        DbuserEntity currentUser = null;
+        User currentUser = null;
         try {
             currentUser = Factory.getInstance().getUserDAO().getUserByName(name);
         } catch (SQLException e) {

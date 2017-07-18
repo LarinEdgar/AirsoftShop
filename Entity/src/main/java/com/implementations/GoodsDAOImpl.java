@@ -1,7 +1,7 @@
 package com.implementations;
 
 import com.dao.GoodsDAO;
-import com.entity.DbgoodsEntity;
+import com.entity.Goods;
 import com.utils.HibernateSessionFactory;
 import org.hibernate.Session;
 
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GoodsDAOImpl implements GoodsDAO {
 
-    public void addGoods(DbgoodsEntity goods) throws SQLException {
+    public void addGoods(Goods goods) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -31,7 +31,7 @@ public class GoodsDAOImpl implements GoodsDAO {
         }
     }
 
-    public void updateGoods(DbgoodsEntity goods) throws SQLException {
+    public void updateGoods(Goods goods) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -47,12 +47,12 @@ public class GoodsDAOImpl implements GoodsDAO {
         }
     }
 
-    public DbgoodsEntity getGoodsById(long id) throws SQLException {
+    public Goods getGoodsById(long id) throws SQLException {
         Session session = null;
-        DbgoodsEntity goods = null;
+        Goods goods = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
-            goods = (DbgoodsEntity) session.load(DbgoodsEntity.class, id);
+            goods = (Goods) session.load(Goods.class, id);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
         } finally {
@@ -65,10 +65,10 @@ public class GoodsDAOImpl implements GoodsDAO {
 
     public List getAllGoods() throws SQLException {
         Session session = null;
-        List goodses = new ArrayList<DbgoodsEntity>();
+        List goodses = new ArrayList<Goods>();
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
-            goodses = session.createCriteria(DbgoodsEntity.class).list();
+            goodses = session.createCriteria(Goods.class).list();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
         } finally {
@@ -79,7 +79,7 @@ public class GoodsDAOImpl implements GoodsDAO {
         return goodses;
     }
 
-    public void deleteGoods(DbgoodsEntity goods) throws SQLException {
+    public void deleteGoods(Goods goods) throws SQLException {
         Session session = null;
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -93,21 +93,5 @@ public class GoodsDAOImpl implements GoodsDAO {
                 session.close();
             }
         }
-    }
-
-    public DbgoodsEntity getCategory(String category) throws SQLException {
-        Session session = null;
-        DbgoodsEntity goods = null;
-        try {
-            session = HibernateSessionFactory.getSessionFactory().openSession();
-            goods = (DbgoodsEntity) session.load(DbgoodsEntity.class, category);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return goods;
     }
 }

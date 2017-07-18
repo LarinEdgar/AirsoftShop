@@ -1,6 +1,6 @@
 package com.webAirsoftShop.controller;
 
-import com.entity.DbuserEntity;
+import com.entity.User;
 import com.factory.Factory;
 import org.json.simple.JSONStreamAware;
 
@@ -25,7 +25,7 @@ public class RegistrationServlet extends APIHandlerServlet.APIRequestHandler {
         String login = request.getParameter("login");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        DbuserEntity user = new DbuserEntity();
+        User user = new User();
         user.setEmail(email);
         user.setUserName(login);
         user.setPassword(password);

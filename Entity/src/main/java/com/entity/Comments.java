@@ -1,6 +1,5 @@
 package com.entity;
 
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,12 +8,13 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "dbcomments", schema = "", catalog = "airsoft_db")
-public class DbcommentsEntity {
+public class Comments {
 
     private int idComment;
     private Date dateComment;
     private String commentText;
-    private DbuserEntity user;
+    private User user;
+    private Goods goods;
 
     @Id
     @Column(name = "COMMENT_ID")
@@ -46,12 +46,22 @@ public class DbcommentsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUser")
-    public DbuserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(DbuserEntity user) {
+    public void setUser(User user) {
         this.user = user;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idGoods")
+    public Goods getGoods(){
+        return goods;
+    }
+
+    public void setGoods(Goods goods){
+        this.goods = goods;
     }
 
     @Override
@@ -59,7 +69,7 @@ public class DbcommentsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DbcommentsEntity that = (DbcommentsEntity) o;
+        Comments that = (Comments) o;
 
         if (idComment != that.idComment) return false;
         if (dateComment != null ? !dateComment.equals(that.dateComment) : that.dateComment != null) return false;
