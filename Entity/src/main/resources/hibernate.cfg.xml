@@ -15,6 +15,10 @@
         <property name="hbm2ddl.auto">create-drop</property>
         <mapping class="com.entity.Goods"/>
         <mapping class="com.entity.User"/>
+        <mapping class="com.entity.Purchase"/>
+        <mapping class="com.entity.GlobalInvoice"/>
+        <mapping class="com.entity.Category"/>
+        <mapping class="com.entity.Comments"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
