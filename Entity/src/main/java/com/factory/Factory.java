@@ -1,9 +1,6 @@
 package com.factory;
 
 import com.dao.*;
-import com.entity.Category;
-import com.entity.GlobalInvoice;
-import com.entity.Purchase;
 import com.implementations.*;
 
 /**
