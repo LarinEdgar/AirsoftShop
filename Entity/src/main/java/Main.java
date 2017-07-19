@@ -16,16 +16,16 @@ public class Main {
         Goods goods = new Goods();
         goods.setGoodsName("0.23g");
         goods.setPrise(7);
-        goods.setCategory("Airsoft BB");
+
         goods.setGoodsName("M4A1");
         goods.setPrise(300.75);
-        goods.setCategory("Rifle");
+
         goods.setGoodsName("Glock19Pro");
         goods.setPrise(325.25);
-        goods.setCategory("Pistol");
+
         goods.setGoodsName("F1");
         goods.setPrise(25.5);
-        goods.setCategory("Grenade");
+
 
         System.out.println("Saving entity");
         session.save(goods);

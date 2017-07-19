@@ -20,14 +20,12 @@ import static com.webAirsoftShop.utils.JSONResponses.ERROR_INCORRECT_REQUEST;
  * Created by Shleck on 7/13/2017.
  */
 public class APIHandlerServlet extends HttpServlet {
+
     public abstract static class APIRequestHandler {
-
         protected abstract JSONStreamAware processRequest(HttpServletRequest request) throws Exception;
-
     }
 
     private static Map<String, APIRequestHandler> apiRequestHandlers = new HashMap<>();
-
     static {
         Map<String, APIRequestHandler> map = new HashMap<>();
 

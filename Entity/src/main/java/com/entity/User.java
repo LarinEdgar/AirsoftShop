@@ -12,8 +12,6 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private GlobalInvoice globalInvoice;
-    private Purchase purchase;
 
     @Id
     @Column(name = "USER_ID")
@@ -54,13 +52,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    //TODO: Finish the connection
-    /* @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "idGlobalInvoice")*/
-
-    /*@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "idPurchase")*/
 
     @Override
     public boolean equals(Object o) {

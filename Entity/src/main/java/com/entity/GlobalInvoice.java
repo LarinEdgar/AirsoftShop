@@ -1,6 +1,8 @@
 package com.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Shleck on 7/18/2017.
@@ -12,7 +14,8 @@ public class GlobalInvoice {
     private int goodsId;
     private String goodsName;
     private double prise;
-    private Purchase purchase;
+    private Set<Purchase> purchase = new HashSet<Purchase>(0);
+    private User user;
 
     @Id
     @Column(name = "GOODS_ID")
@@ -44,15 +47,23 @@ public class GlobalInvoice {
         this.prise = prise;
     }
 
-    //TODO: Finish/check the connection
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "idPurchase")
-
-    public Purchase getPurchase() {
-        return purchase;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "idUser")
+    public User getUser() {
+        return user;
     }
 
-    public void setPurchase(Purchase purchase) {
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPurchase")
+    public Set<Purchase> getPurchase() {
+        return this.purchase;
+    }
+
+    public void setPurchase(Set<Purchase> purchase) {
         this.purchase = purchase;
     }
 

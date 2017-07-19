@@ -1,6 +1,8 @@
 package com.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Shleck on 7/7/2017.
@@ -11,9 +13,8 @@ public class Goods {
     private int goodsId;
     private String goodsName;
     private double prise;
-    private GlobalInvoice globalInvoice;
     private Purchase purchase;
-    private Category category;
+    private Set<Category> category = new HashSet<Category>(0);
 
     @Id
     @Column(name = "GOODS_ID")
@@ -45,15 +46,25 @@ public class Goods {
         this.prise = prise;
     }
 
-    //TODO: Finish the connection
-   /* @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "idGlobalInvoice")*/
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "idGoods")
+    public Purchase getPurchase() {
+        return purchase;
+    }
 
-    /*@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "idPurchase")*/
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
+    }
 
-    /*@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "idCategory")*/
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCategory")
+    public Set<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.category = category;
+    }
 
     @Override
     public boolean equals(Object o) {
